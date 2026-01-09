@@ -3,21 +3,23 @@ package com.accounts.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.accounts.client.OtpClient;
 import com.accounts.dto.OtpDto;
+import com.otp.entity.Otp;
+import com.otp.service.OtpService;
 
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
-public class OtpService {
+public class OtpServiceImpl {
 	
-	@Autowired
-	OtpClient otpClient;
 	private static final String OTP_CB = "otpService";
 	
+	@Autowired
+	private OtpService otpService;
+	
 	@CircuitBreaker(name = OTP_CB, fallbackMethod = "otpFallback")
-	public OtpDto generateOtpWithhCircuitBreaker(String userName) {
-		return otpClient.generateOtp(userName);
+	public Otp generateOtpWithhCircuitBreaker(String userName) {
+		return otpService.generateOtp(userName);
 	}
 
 	public OtpDto otpFallback(String userName, Throwable ex) {
