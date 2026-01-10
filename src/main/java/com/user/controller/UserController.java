@@ -151,7 +151,4 @@ public class UserController {
 	        // This endpoint is deprecated. Use /api/cart/add instead
 	        return ResponseEntity.ok("Please use /api/cart/add endpoint for adding items to cart");
 	    }
-	    }
-	    
-	    
-	}
+}
