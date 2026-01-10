@@ -146,8 +146,11 @@ public class UserController {
 	    }
 
 	    @PostMapping("/addToCart")
-	    public ResponseEntity<?>addToCart(@RequestBody AddToCartRequest req){
-	    	return null;
+	    @PreAuthorize("hasRole('USER')")
+	    public ResponseEntity<String> addToCart(@RequestBody AddToCartRequest req) {
+	        // This endpoint is deprecated. Use /api/cart/add instead
+	        return ResponseEntity.ok("Please use /api/cart/add endpoint for adding items to cart");
+	    }
 	    }
 	    
 	    
